@@ -2,6 +2,7 @@ package com.ojasare.loans.controller;
 
 import com.ojasare.loans.constants.LoansConstants;
 import com.ojasare.loans.dto.ErrorResponseDto;
+import com.ojasare.loans.dto.LoansContactInfoDto;
 import com.ojasare.loans.dto.LoansDto;
 import com.ojasare.loans.dto.ResponseDto;
 import com.ojasare.loans.service.ILoansService;
@@ -27,11 +28,16 @@ import org.springframework.web.bind.annotation.*;
 )
 @RestController
 @RequestMapping(path = "/api/v1", produces = {MediaType.APPLICATION_JSON_VALUE})
-@AllArgsConstructor
 @Validated
 public class LoansController {
 
-    private ILoansService iLoansService;
+    private final ILoansService iLoansService;
+    private final LoansContactInfoDto loansContactInfoDto;
+
+    public LoansController(ILoansService iLoansService, LoansContactInfoDto loansContactInfoDto) {
+        this.iLoansService = iLoansService;
+        this.loansContactInfoDto = loansContactInfoDto;
+    }
 
     @Operation(
             summary = "Create Loan REST API",
@@ -159,6 +165,32 @@ public class LoansController {
                     .status(HttpStatus.EXPECTATION_FAILED)
                     .body(new ResponseDto(LoansConstants.STATUS_417, LoansConstants.MESSAGE_417_DELETE));
         }
+    }
+
+
+    @Operation(
+            summary = "Get Contact Info",
+            description = "Contact Info details that can be reached out in case of any issues"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    }
+    )
+    @GetMapping("/contact-info")
+    public ResponseEntity<LoansContactInfoDto> getContactInfo() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(loansContactInfoDto);
     }
 
 }

@@ -12,20 +12,21 @@ import com.ojasare.accounts.mapper.CustomerMapper;
 import com.ojasare.accounts.repository.AccountRepository;
 import com.ojasare.accounts.repository.CustomerRepository;
 import com.ojasare.accounts.service.IAccountsService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 
 @Service
-@AllArgsConstructor
 public class AccountServiceImpl implements IAccountsService {
 
     private final AccountRepository accountRepository;
     private final CustomerRepository customerRepository;
 
+    public AccountServiceImpl(AccountRepository accountRepository, CustomerRepository customerRepository) {
+        this.accountRepository = accountRepository;
+        this.customerRepository = customerRepository;
+    }
 
     /**
      * @param customerDto - CustomerDto Object

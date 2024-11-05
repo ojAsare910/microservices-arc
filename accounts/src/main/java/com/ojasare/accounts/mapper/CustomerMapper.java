@@ -1,5 +1,6 @@
 package com.ojasare.accounts.mapper;
 
+import com.ojasare.accounts.dto.CustomerDetailsDto;
 import com.ojasare.accounts.dto.CustomerDto;
 import com.ojasare.accounts.entity.Customer;
 
@@ -10,6 +11,13 @@ public class CustomerMapper {
         customerDto.setEmail(customer.getEmail());
         customerDto.setMobileNumber(customer.getMobileNumber());
         return customerDto;
+    }
+
+    public static CustomerDetailsDto maptoCustomerDetailsDto(Customer customer, CustomerDetailsDto customerDetailsDto) {
+        customerDetailsDto.setName(customer.getName());
+        customerDetailsDto.setEmail(customer.getEmail());
+        customerDetailsDto.setMobileNumber(customer.getMobileNumber());
+        return customerDetailsDto;
     }
 
     public static Customer maptoCustomer(CustomerDto customerDto, Customer customer) {

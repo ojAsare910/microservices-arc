@@ -8,17 +8,19 @@ import com.ojasare.cards.exception.ResourceNotFoundException;
 import com.ojasare.cards.mapper.CardsMapper;
 import com.ojasare.cards.repository.CardsRepository;
 import com.ojasare.cards.service.ICardsService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.Random;
 
 @Service
-@AllArgsConstructor
 public class CardsServiceImpl implements ICardsService {
 
-    private CardsRepository cardsRepository;
+    private final CardsRepository cardsRepository;
+
+    public CardsServiceImpl(CardsRepository cardsRepository) {
+        this.cardsRepository = cardsRepository;
+    }
 
     /**
      * @param mobileNumber - Mobile Number of the Customer

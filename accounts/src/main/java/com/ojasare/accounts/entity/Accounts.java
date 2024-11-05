@@ -7,8 +7,6 @@ import lombok.*;
 
 @Entity
 @Getter @Setter @ToString
-@AllArgsConstructor
-@NoArgsConstructor
 public class Accounts extends BaseEntity {
 
     @Id
@@ -20,4 +18,14 @@ public class Accounts extends BaseEntity {
 
     private String branchAddress;
 
+
+    public Accounts(Long accountNumber, Long customerId, String accountType, String branchAddress) {
+        this.accountNumber = accountNumber;
+        this.customerId = customerId;
+        this.accountType = accountType;
+        this.branchAddress = branchAddress;
+    }
+
+    public Accounts() {
+    }
 }
